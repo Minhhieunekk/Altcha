@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Altcha Verification</title>
+    <script src="https://cdn.jsdelivr.net/npm/altcha@latest/dist/altcha.min.js"></script>
+</head>
+<body>
+<h2>Altcha Verification Form</h2>
+
+<form id="myForm" action="/submit" method="post">
+    <altcha-widget theme="light"></altcha-widget>
+    <input type="hidden" id="altcha-token" name="altcha">
+    <input type="submit" value="Submit">
+</form>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let widget = document.querySelector("altcha-widget");
+
+        widget.addEventListener("verified", function (event) {
+            let token = event.detail.token;
+            document.getElementById("altcha-token").value = token;
+            console.log("Altcha Token:", token);
+        });
+    });
+</script>
+</body>
+</html>
